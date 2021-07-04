@@ -25,7 +25,7 @@ object AppModule {
     @Singleton
     @Provides
     fun provideRetrofit(gson: Gson) : Retrofit = Retrofit.Builder()
-        .baseUrl("https://rickandmortyapi.com/api/")
+        .baseUrl("https://api.github.com/")
         .addConverterFactory(GsonConverterFactory.create(gson))
         .build()
 
