@@ -38,12 +38,12 @@ class ItemDetailFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        viewModel.character.observe(viewLifecycleOwner, Observer {
+        viewModel.items.observe(viewLifecycleOwner, Observer {
             when (it.status) {
                 Resource.Status.SUCCESS -> {
-                    bindCharacter(it.data!!)
+                    binditems(it.data!!)
                     binding.progressBar.visibility = View.GONE
-                    binding.characterCl.visibility = View.VISIBLE
+
                 }
 
                 Resource.Status.ERROR ->
@@ -51,21 +51,23 @@ class ItemDetailFragment : Fragment() {
 
                 Resource.Status.LOADING -> {
                     binding.progressBar.visibility = View.VISIBLE
-                    binding.characterCl.visibility = View.GONE
+
                 }
             }
         })
     }
 
-    private fun bindCharacter(character: Item) {
-        binding.name.text = character.name
-        binding.species.text = character.blobs_url
-        binding.status.text = character.branches_url
-        binding.gender.text = character.clone_url
+    private fun binditems(items: Item) {
+        binding.tvName.text = items.name
+        binding.tvLanguage.text = "Language : "+items.language
+        binding.tvStar.text = "Star : "+items.stargazers_count.toString()
+        binding.tvView.text = "Views : "+items.watchers_count.toString()
+        binding.tvShare.text = "Share : "+items.forks_count.toString()
+        binding.tvDesc.text = items.description
         Glide.with(binding.root)
-            .load(character.blobs_url)
+            .load(items.owner?.avatar_url)
             .transform(CircleCrop())
-            .into(binding.image)
+            .into(binding.ivImage)
     }
 
 }

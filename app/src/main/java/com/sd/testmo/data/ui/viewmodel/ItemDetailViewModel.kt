@@ -13,10 +13,10 @@ class ItemDetailViewModel @ViewModelInject constructor(private val repository: I
 
     private val _id = MutableLiveData<Int>()
 
-    private val _character = _id.switchMap { id ->
+    private val _items = _id.switchMap { id ->
         repository.getItems(id)
     }
-    val character: LiveData<Resource<Item>> = _character
+    val items: LiveData<Resource<Item>> = _items
 
 
     fun start(id: Int) {

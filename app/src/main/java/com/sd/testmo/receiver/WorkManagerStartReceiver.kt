@@ -14,7 +14,6 @@ import java.util.concurrent.TimeUnit
 class WorkManagerStartReceiver : BroadcastReceiver() {
     var mWorkManager: WorkManager? = null
 
-
     override fun onReceive(context: Context?, intent: Intent?) {
 
         val myWorkBuilder = PeriodicWorkRequest.Builder(

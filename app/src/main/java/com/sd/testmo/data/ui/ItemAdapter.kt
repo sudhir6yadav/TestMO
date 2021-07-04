@@ -5,13 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.sd.testmo.data.entities.Item
 import com.sd.testmo.databinding.ItemAdapterBinding
 
-class ItemAdapter(private val listener: CharacterItemListener) : RecyclerView.Adapter<CharacterViewHolder>() {
+class ItemAdapter(private val listener: itemsItemListener) : RecyclerView.Adapter<itemsViewHolder>() {
 
-    interface CharacterItemListener {
-        fun onClickedCharacter(characterId: Int)
+    interface itemsItemListener {
+        fun onClickeditems(itemsId: Int)
     }
 
     private val items = ArrayList<Item>()
@@ -22,17 +24,17 @@ class ItemAdapter(private val listener: CharacterItemListener) : RecyclerView.Ad
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): itemsViewHolder {
         val binding: ItemAdapterBinding = ItemAdapterBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return CharacterViewHolder(binding, listener)
+        return itemsViewHolder(binding, listener)
     }
 
     override fun getItemCount(): Int = items.size
 
-    override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) = holder.bind(items[position])
+    override fun onBindViewHolder(holder: itemsViewHolder, position: Int) = holder.bind(items[position])
 }
 
-class CharacterViewHolder(private val itemBinding: ItemAdapterBinding, private val listener: ItemAdapter.CharacterItemListener) : RecyclerView.ViewHolder(itemBinding.root),
+class itemsViewHolder(private val itemBinding: ItemAdapterBinding, private val listener: ItemAdapter.itemsItemListener) : RecyclerView.ViewHolder(itemBinding.root),
     View.OnClickListener {
 
     private lateinit var item: Item
@@ -41,19 +43,19 @@ class CharacterViewHolder(private val itemBinding: ItemAdapterBinding, private v
         itemBinding.root.setOnClickListener(this)
     }
 
-    @SuppressLint("SetTextI18n")
+
     fun bind(item: Item) {
         this.item = item
         itemBinding.name.text = item.name
-        itemBinding.speciesAndStatus.text = """${item.full_name} - ${item.statuses_url}"""
-       /* Glide.with(itemBinding.root)
-            .load(item.contributors_url)
+        itemBinding.fullName.text = "${item.full_name}"
+        Glide.with(itemBinding.root)
+            .load(item.owner?.avatar_url)
             .transform(CircleCrop())
-            .into(itemBinding.image)*/
+            .into(itemBinding.image)
     }
 
     override fun onClick(v: View?) {
-        listener.onClickedCharacter(item.id)
+        listener.onClickeditems(item.id)
     }
 }
 

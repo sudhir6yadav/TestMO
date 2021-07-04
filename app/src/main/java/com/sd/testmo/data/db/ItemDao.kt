@@ -23,5 +23,4 @@ interface ItemDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(item: Item)
 
-
 }

@@ -19,15 +19,15 @@ import dagger.hilt.android.AndroidEntryPoint
 import androidx.fragment.app.viewModels
 
 @AndroidEntryPoint
-class ItemFragment : Fragment(),ItemAdapter.CharacterItemListener{
+class ItemFragment : Fragment(),ItemAdapter.itemsItemListener{
 
   private var binding: ItemFragmentBinding by autoCleared()
   private val viewModel: ItemViewModel by viewModels()
   private lateinit var adapter: ItemAdapter
 
   override fun onCreateView(
-    inflater: LayoutInflater, container: ViewGroup?,
-    savedInstanceState: Bundle?
+          inflater: LayoutInflater, container: ViewGroup?,
+          savedInstanceState: Bundle?
   ): View? {
     binding = ItemFragmentBinding.inflate(inflater, container, false)
     return binding.root
@@ -41,8 +41,8 @@ class ItemFragment : Fragment(),ItemAdapter.CharacterItemListener{
 
   private fun setupRecyclerView() {
     adapter = ItemAdapter(this)
-    binding.charactersRv.layoutManager = LinearLayoutManager(requireContext())
-    binding.charactersRv.adapter = adapter
+    binding.itemssRv.layoutManager = LinearLayoutManager(requireContext())
+    binding.itemssRv.adapter = adapter
   }
 
   private fun setupObservers() {
@@ -61,10 +61,10 @@ class ItemFragment : Fragment(),ItemAdapter.CharacterItemListener{
     })
   }
 
-  override fun onClickedCharacter(characterId: Int) {
+  override fun onClickeditems(itemsId: Int) {
     findNavController().navigate(
-      R.id.action_charactersFragment_to_characterDetailFragment,
-      bundleOf("id" to characterId)
+            R.id.action_itemssFragment_to_itemsDetailFragment,
+            bundleOf("id" to itemsId)
     )
   }
 }
