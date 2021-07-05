@@ -24,7 +24,5 @@ class WorkManagerStartReceiver : BroadcastReceiver() {
         val myWork = myWorkBuilder.build()
         mWorkManager = WorkManager.getInstance(context!!)
         mWorkManager!!.enqueue(myWork)
-        Log.d("insideBroadcast", "onReceive: Restart Work Mnager")
-        Toast.makeText(context,"Restart Work Mnager",Toast.LENGTH_LONG).show()
     }
 }

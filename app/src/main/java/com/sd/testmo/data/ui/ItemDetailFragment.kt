@@ -24,8 +24,7 @@ class ItemDetailFragment : Fragment() {
     private val viewModel: ItemDetailViewModel by viewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?
     ): View? {
         binding = ItemDetailFragmentBinding.inflate(inflater, container, false)
         return binding.root
@@ -51,7 +50,6 @@ class ItemDetailFragment : Fragment() {
 
                 Resource.Status.LOADING -> {
                     binding.progressBar.visibility = View.VISIBLE
-
                 }
             }
         })
@@ -64,10 +62,7 @@ class ItemDetailFragment : Fragment() {
         binding.tvView.text = "Views : "+items.watchers_count.toString()
         binding.tvShare.text = "Share : "+items.forks_count.toString()
         binding.tvDesc.text = items.description
-        Glide.with(binding.root)
-            .load(items.owner?.avatar_url)
-            .transform(CircleCrop())
-            .into(binding.ivImage)
+        Glide.with(binding.root).load(items.owner?.avatar_url).transform(CircleCrop()).into(binding.ivImage)
     }
 
 }

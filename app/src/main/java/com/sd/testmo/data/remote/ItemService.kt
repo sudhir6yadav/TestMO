@@ -5,6 +5,6 @@ import retrofit2.Response
 import retrofit2.http.GET
 
 interface ItemService {
-    @GET("search/repositories?q=android%20language:java&sort=stars&order=desc&per_page=10")
+    @GET("search/repositories?q=android%20language:java&sort=stars&per_page=20&order=desc")
     suspend fun getAllRepo() : Response<Repo>
 }
