@@ -8,7 +8,6 @@ import androidx.room.TypeConverters
 import com.sd.testmo.data.entities.Item
 
 @Database(entities = [Item::class], version = 6, exportSchema = false)
-@TypeConverters(NestedDataTypeConverter::class)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun itemDao(): ItemDao
